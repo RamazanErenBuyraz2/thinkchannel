@@ -951,13 +951,13 @@
 
   .test-row h2 {
     padding-inline: var(--catalog-inset);
-    font-size: 23px;
+    font-size: 22px;
   }
 
   .test-catalog {
     gap: 24px;
     padding-top: 12px;
-    --catalog-inset: 16px;
+    --catalog-inset: clamp(20px, 5vw, 30px);
   }
 
   .test-catalog__section-group {
@@ -974,7 +974,7 @@
   }
 
   .test-top-ten-heading h2 {
-    font-size: 27px;
+    font-size: 25px;
   }
 
   .test-top-ten-card {
@@ -999,20 +999,20 @@
 
   .test-row__carousel--posters {
     --poster-gap: 10px;
-    --poster-card-width: clamp(160px, 52vw, 220px);
+    --poster-card-width: clamp(150px, 48vw, 205px);
     --poster-peek: clamp(40px, 11vw, 52px);
   }
 
   .test-row__carousel--top-ten {
     --top-ten-gap: 10px;
-    --top-ten-card-width: clamp(160px, 52vw, 220px);
+    --top-ten-card-width: clamp(150px, 48vw, 205px);
     --poster-peek: clamp(40px, 11vw, 52px);
     width: 100%;
   }
 
   .test-row__carousel--continue {
     --continue-gap: 12px;
-    --continue-card-width: clamp(250px, 72vw, 330px);
+    --continue-card-width: clamp(230px, 68vw, 305px);
     --poster-peek: clamp(40px, 11vw, 52px);
   }
 
