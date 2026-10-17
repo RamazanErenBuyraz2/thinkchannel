@@ -4369,15 +4369,27 @@ function AuthenticatedHome({
 
   useEffect(() => {
     if (featuredSlides.length < 2) return
-    if (featuredSlides[activeSlideIndex % featuredSlides.length]?.background_video_url) return
-    const timer = window.setTimeout(() => {
-      setActiveSlideIndex((index) => (index + 1) % featuredSlides.length)
-    }, 5000)
-    return () => window.clearTimeout(timer)
+    const activeSlide = featuredSlides[activeSlideIndex % featuredSlides.length]
+    const mobileQuery = window.matchMedia("(max-width: 639px)")
+    let timer: number | undefined
+    const scheduleNextSlide = () => {
+      if (timer !== undefined) window.clearTimeout(timer)
+      if (activeSlide?.background_video_url && !(pathname === "/tr-tr/browse/test" && mobileQuery.matches)) return
+      timer = window.setTimeout(() => {
+        setActiveSlideIndex((index) => (index + 1) % featuredSlides.length)
+      }, 5000)
+    }
+    scheduleNextSlide()
+    if (pathname === "/tr-tr/browse/test") mobileQuery.addEventListener("change", scheduleNextSlide)
+    return () => {
+      if (timer !== undefined) window.clearTimeout(timer)
+      mobileQuery.removeEventListener("change", scheduleNextSlide)
+    }
   }, [
     activeSlideIndex,
     featuredSlides.length,
     featuredSlides[activeSlideIndex % featuredSlides.length]?.background_video_url,
+    pathname,
   ])
 
   useEffect(() => {

@@ -6,6 +6,7 @@ import { HomePromoCard } from "./HomePromoCard"
 import { useHomeBackgroundVideoPreference } from "./homeVideoAmbientPreference"
 import { useVideoAmbient, VideoAmbientLayer } from "./useVideoAmbient"
 import type { ContinueWatchingItem, FeaturedHomeSlide, HomeCatalogCollection, HomeCatalogItem } from "./types"
+import type { MouseEvent as ReactMouseEvent, TouchEvent as ReactTouchEvent } from "react"
 
 export function TestBrowsePage({
   slides,
@@ -28,7 +29,8 @@ export function TestBrowsePage({
 }) {
   const slideIndex = slides.length ? activeSlideIndex % slides.length : 0
   const slide = slides[slideIndex]
-  const backgroundVideoEnabled = useHomeBackgroundVideoPreference()
+  const isMobileLayout = useMobileLayout()
+  const backgroundVideoEnabled = useHomeBackgroundVideoPreference() && !isMobileLayout
   const catalogContentKey = collections
     .map((collection) => `${collection.id}:${collection.items.map((item) => item.id).join(",")}`)
     .join("|")
@@ -380,7 +382,7 @@ function TestHeroSlide({
       {detailsHref && (
         <a className="test-hero__details-link" href={detailsHref} aria-label={`${slide.title} ayrıntıları`} />
       )}
-      <div className="test-hero__content">
+      <div className="test-hero__content" key={`${slide.id}-${active ? "active" : "inactive"}`}>
         {slide.logo_url
           ? <img
             className="test-hero__logo"
@@ -435,6 +437,7 @@ function TestCollectionRow({
   title: string
 }) {
   const minimumPosterCount = 37
+  const isMobileLayout = useMobileLayout()
   const posterItems = useMemo(
     () => createRepeatedRandomItems(items, Math.max(minimumPosterCount, items.length)),
     [items],
@@ -443,8 +446,8 @@ function TestCollectionRow({
   const [firstVisibleIndex, setFirstVisibleIndex] = useState(0)
   const [cardStride, setCardStride] = useState(0)
   const posterCount = posterItems.length
-  const pageSize = 5
-  const lastFirstVisibleIndex = Math.floor(Math.max(0, posterCount - pageSize) / pageSize) * pageSize
+  const pageSize = isMobileLayout ? 2 : 5
+  const lastFirstVisibleIndex = Math.max(0, posterCount - pageSize)
 
   useEffect(() => {
     setFirstVisibleIndex(0)
@@ -481,10 +484,12 @@ function TestCollectionRow({
     })
   }
 
+  const swipeHandlers = useTouchSwipe(moveTrack)
+
   return (
     <section className="test-row" aria-label={title}>
       <h2>{title}</h2>
-      <div className="test-row__carousel test-row__carousel--posters">
+      <div className="test-row__carousel test-row__carousel--posters" {...swipeHandlers}>
         <div
           className="test-row__track test-row__track--posters"
           ref={trackRef}
@@ -509,10 +514,11 @@ function TestCollectionRow({
 }
 
 function TestTopTenRow({ items }: { items: { item: HomeCatalogItem; instance: number }[] }) {
+  const isMobileLayout = useMobileLayout()
   const trackRef = useRef<HTMLDivElement>(null)
   const [firstVisibleIndex, setFirstVisibleIndex] = useState(0)
   const [cardStride, setCardStride] = useState(0)
-  const pageSize = 6
+  const pageSize = isMobileLayout ? 2 : 6
   const lastFirstVisibleIndex = Math.max(0, items.length - pageSize)
 
   useEffect(() => {
@@ -548,6 +554,8 @@ function TestTopTenRow({ items }: { items: { item: HomeCatalogItem; instance: nu
     })
   }
 
+  const swipeHandlers = useTouchSwipe(moveTrack)
+
   return (
     <section className="test-row test-row--top-ten" aria-label="Top 10">
       <header className="test-top-ten-heading">
@@ -555,7 +563,7 @@ function TestTopTenRow({ items }: { items: { item: HomeCatalogItem; instance: nu
         <h2>Top 10</h2>
         <span className="test-top-ten-heading__rule" aria-hidden="true" />
       </header>
-      <div className="test-row__carousel test-row__carousel--top-ten">
+      <div className="test-row__carousel test-row__carousel--top-ten" {...swipeHandlers}>
         <div
           className="test-row__track test-row__track--top-ten"
           ref={trackRef}
@@ -636,6 +644,7 @@ function TestContinueRow({
   items: ContinueWatchingItem[]
   onRemove: (contentId: string) => void
 }) {
+  const isMobileLayout = useMobileLayout()
   const trackRef = useRef<HTMLDivElement>(null)
   const shuffledItems = useMemo(() => shuffleItems(items), [items])
   const [firstVisibleIndex, setFirstVisibleIndex] = useState(0)
@@ -644,7 +653,7 @@ function TestContinueRow({
   const displayedItems = useMemo(() => shuffledItems.length > 0
     ? createRepeatedRandomItems(shuffledItems, Math.max(37, shuffledItems.length))
     : [], [shuffledItems])
-  const pageSize = 5
+  const pageSize = isMobileLayout ? 1 : 5
   const lastFirstVisibleIndex = Math.floor(Math.max(0, displayedItems.length - pageSize) / pageSize) * pageSize
 
   useEffect(() => {
@@ -682,11 +691,14 @@ function TestContinueRow({
     })
   }
 
+  const swipeHandlers = useTouchSwipe(moveTrack)
+
   return (
     <section className="test-row test-row--continue" aria-label="İzlemeye Devam Et">
       <h2>İzlemeye Devam Et</h2>
       <div
         className="test-row__carousel test-row__carousel--continue"
+        {...swipeHandlers}
         style={{ "--continue-artwork-height": `${artworkHeight}px` } as CSSProperties}
       >
         <div
@@ -769,6 +781,52 @@ function createRepeatedRandomItems<T extends { id: string }>(items: T[], count: 
   }
 
   return repeated
+}
+
+function useMobileLayout() {
+  const [isMobileLayout, setIsMobileLayout] = useState(
+    () => window.matchMedia("(max-width: 639px)").matches,
+  )
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 639px)")
+    const updateLayout = (event: MediaQueryListEvent) => setIsMobileLayout(event.matches)
+    mediaQuery.addEventListener("change", updateLayout)
+    return () => mediaQuery.removeEventListener("change", updateLayout)
+  }, [])
+
+  return isMobileLayout
+}
+
+function useTouchSwipe(onMove: (direction: -1 | 1) => void) {
+  const startX = useRef<number | null>(null)
+  const didSwipe = useRef(false)
+
+  function handleTouchStart(event: ReactTouchEvent<HTMLDivElement>) {
+    didSwipe.current = false
+    startX.current = event.touches.length === 1 ? event.touches[0].clientX : null
+  }
+
+  function handleTouchEnd(event: ReactTouchEvent<HTMLDivElement>) {
+    if (startX.current === null) return
+    const distance = event.changedTouches[0].clientX - startX.current
+    startX.current = null
+    if (Math.abs(distance) < 40) return
+    didSwipe.current = true
+    onMove(distance < 0 ? 1 : -1)
+  }
+
+  return {
+    onTouchStart: handleTouchStart,
+    onTouchEnd: handleTouchEnd,
+    onTouchCancel: () => { startX.current = null },
+    onClickCapture: (event: ReactMouseEvent<HTMLDivElement>) => {
+      if (!didSwipe.current) return
+      didSwipe.current = false
+      event.preventDefault()
+      event.stopPropagation()
+    },
+  }
 }
 
 function shuffleItems<T>(items: T[]) {

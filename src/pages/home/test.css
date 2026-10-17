@@ -538,6 +538,7 @@
 
 .test-row__carousel {
   position: relative;
+  touch-action: pan-y pinch-zoom;
 }
 
 .test-row__carousel--posters {
@@ -788,43 +789,115 @@
 
 @media (max-width: 639px) {
   .test-page {
-    padding-top: calc(var(--home-header-height, 58px) + 10vh + 24px);
+    padding-top: calc(var(--home-header-height, 58px) + 12px);
   }
 
   .test-hero-wrap {
-    padding-inline: clamp(14px, 4vw, 24px);
+    margin-top: 0;
+    padding-inline: 0;
   }
 
   .test-hero {
-    height: clamp(320px, 75vw, 460px);
+    height: clamp(320px, 82vw, 390px);
     border-radius: 12px;
   }
 
   .test-hero-stage {
-    height: clamp(320px, 75vw, 460px);
+    height: clamp(320px, 82vw, 390px);
   }
 
-  .test-hero-stage {
-    grid-template-columns: clamp(42px, 12vw, 66px) minmax(0, 1fr) clamp(42px, 12vw, 66px);
-    gap: 7px;
+  .test-hero__content,
+  .test-hero.is-video-playing .test-hero__content {
+    top: 50%;
+    left: 50%;
+    width: min(78%, 330px);
+    text-align: center;
+    transform: translate(-50%, -50%);
   }
 
-  .test-hero__content {
-    left: 24px;
-    width: 70%;
+  .test-hero__content > .home-featured__metadata {
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
   }
 
   .test-hero__content h1 {
-    font-size: clamp(28px, 8vw, 40px);
+    font-size: clamp(26px, 7vw, 34px);
   }
 
   .test-hero__logo {
-    max-height: 90px;
+    width: min(270px, 78%);
+    max-height: 82px;
+    margin-inline: auto;
+    object-position: center;
   }
 
-  .test-hero__metadata {
+  .test-hero__content > .home-featured__actions {
+    justify-content: center;
+    margin-top: 0;
+  }
+
+  .test-hero__content > .home-featured__actions .home-featured__action {
+    width: 128px;
+    min-height: 42px;
+    margin-top: 14px;
+    font-size: 12px;
+  }
+
+  .test-hero__nav {
+    width: 42px;
+    opacity: .85;
+  }
+
+  .test-hero__nav svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  .test-hero__sound-toggle {
+    right: 14px;
+    bottom: 14px;
+    width: 38px;
+    height: 38px;
+  }
+
+  .test-hero__sound-toggle svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .test-hero__dots {
+    min-height: 30px;
+    padding-top: 4px;
+  }
+
+  .test-hero__content > .home-featured__metadata {
     margin-top: 10px;
     font-size: 12px;
+  }
+
+  .test-hero__content > .home-featured__metadata .home-featured__metadata-item {
+    font-size: 12px;
+  }
+
+  .test-hero__metadata-reveal {
+    animation-delay: 900ms !important;
+  }
+
+  .test-hero__metadata-reveal:nth-child(2) {
+    animation-delay: 1020ms !important;
+  }
+
+  .test-hero__metadata-reveal:nth-child(3) {
+    animation-delay: 1140ms !important;
+  }
+
+  .test-hero__metadata-reveal:nth-child(4) {
+    animation-delay: 1260ms !important;
+  }
+
+  .test-hero__metadata-reveal:nth-child(5) {
+    animation-delay: 1380ms !important;
   }
 
   .test-hero__preview {
@@ -838,6 +911,20 @@
   .test-row h2 {
     padding-inline: var(--catalog-inset);
     font-size: 20px;
+  }
+
+  .test-catalog {
+    gap: 24px;
+    padding-top: 12px;
+    --catalog-inset: 16px;
+  }
+
+  .test-catalog__section-group {
+    gap: 24px;
+  }
+
+  .test-top-ten-heading {
+    padding-inline: var(--catalog-inset);
   }
 
   .test-top-ten-heading {
@@ -868,25 +955,60 @@
   }
 
   .test-row__track {
-    gap: 12px;
-    padding-inline: clamp(14px, 4vw, 24px);
+    gap: 10px;
+    padding: 12px var(--catalog-inset) 20px;
   }
 
-  .test-row__nav {
-    width: 38px;
-    height: 60px;
+  .test-row__carousel--posters {
+    --poster-gap: 10px;
+    --poster-card-width: clamp(150px, 42vw, 190px);
+    --poster-peek: clamp(40px, 11vw, 52px);
   }
 
-  .test-row__nav svg {
-    width: 28px;
-    height: 28px;
-  }
-
-  .test-poster {
-    flex-basis: clamp(138px, 42vw, 184px);
+  .test-row__carousel--top-ten {
+    --top-ten-gap: 10px;
+    --top-ten-card-width: clamp(150px, 42vw, 190px);
+    --poster-peek: clamp(40px, 11vw, 52px);
   }
 
   .test-row__carousel--continue {
-    --poster-peek: calc(var(--catalog-inset) - 12px);
+    --continue-gap: 12px;
+    --continue-card-width: clamp(250px, 72vw, 330px);
+    --poster-peek: clamp(40px, 11vw, 52px);
+  }
+
+  .test-row__nav {
+    top: 12px;
+    bottom: 20px;
+    width: var(--poster-peek);
+    opacity: .85;
+  }
+
+  .test-row__nav svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .test-poster {
+    flex-basis: var(--poster-card-width);
+  }
+
+  .test-continue-card__info h3 {
+    font-size: 14px;
+  }
+
+  .test-continue-card__info p,
+  .test-continue-card__metadata {
+    font-size: 12px;
+  }
+
+  .home-page-header:has(+ .home-header-divider + .authenticated-home--browse-test) .home-header-icon {
+    width: 32px;
+    height: 34px;
+  }
+
+  .home-page-header:has(+ .home-header-divider + .authenticated-home--browse-test) .home-header-icon svg {
+    width: 18px;
+    height: 18px;
   }
 }
