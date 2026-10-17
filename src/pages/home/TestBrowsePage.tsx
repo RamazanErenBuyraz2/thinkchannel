@@ -167,6 +167,7 @@ export function TestBrowsePage({
                   active={index === trackPosition}
                   muted={videoMuted}
                   backgroundVideoEnabled={backgroundVideoEnabled}
+                  mobileLayout={isMobileLayout}
                   onVideoEnded={() => onMoveSlide(1)}
                   key={`${item.id}-${index}`}
                 />
@@ -261,12 +262,14 @@ function TestHeroSlide({
   active,
   muted,
   backgroundVideoEnabled,
+  mobileLayout,
   onVideoEnded,
 }: {
   slide: FeaturedHomeSlide
   active: boolean
   muted: boolean
   backgroundVideoEnabled: boolean
+  mobileLayout: boolean
   onVideoEnded: () => void
 }) {
   const [videoReady, setVideoReady] = useState(false)
@@ -279,8 +282,10 @@ function TestHeroSlide({
   const metadataCount = Number(Boolean(slide.age_icon_url))
     + (slide.quality_icon_urls?.length ?? 0)
     + metadata.length
+  const metadataStartDelay = mobileLayout ? 850 : 1250
+  const metadataStagger = mobileLayout ? 120 : 180
   const metadataRevealDuration = metadataCount > 0
-    ? 1250 + (metadataCount - 1) * 180 + 550
+    ? metadataStartDelay + (metadataCount - 1) * metadataStagger + 500
     : 0
   useVideoAmbient(videoRef, ambientCanvasRef, backgroundVideoEnabled && videoPlaying && ambientReady)
 
@@ -345,7 +350,7 @@ function TestHeroSlide({
     metadataRevealIndex += 1
     return {
       className: `${className} test-hero__metadata-reveal`,
-      style: { animationDelay: `${1250 + index * 180}ms` },
+      style: { animationDelay: `${metadataStartDelay + index * metadataStagger}ms` },
     }
   }
   return (
@@ -414,10 +419,18 @@ function TestHeroSlide({
             ))}
           </div>
         )}
+        {slide.description && (
+          <p
+            className="home-featured__description test-hero__description-reveal"
+            style={{ animationDelay: `${metadataRevealDuration + 150}ms` }}
+          >
+            {slide.description}
+          </p>
+        )}
         {detailsHref && (
           <div
             className="home-featured__actions"
-            style={{ animationDelay: `${metadataCount > 0 ? metadataRevealDuration + 180 : 1250}ms` }}
+            style={{ animationDelay: `${metadataRevealDuration + (slide.description ? 700 : 180)}ms` }}
           >
             <a className="home-featured__action" href={detailsHref}>AYRINTILAR</a>
           </div>
@@ -654,7 +667,7 @@ function TestContinueRow({
     ? createRepeatedRandomItems(shuffledItems, Math.max(37, shuffledItems.length))
     : [], [shuffledItems])
   const pageSize = isMobileLayout ? 1 : 5
-  const lastFirstVisibleIndex = Math.floor(Math.max(0, displayedItems.length - pageSize) / pageSize) * pageSize
+  const lastFirstVisibleIndex = Math.max(0, displayedItems.length - pageSize)
 
   useEffect(() => {
     setFirstVisibleIndex(0)
