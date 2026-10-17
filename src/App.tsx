@@ -167,6 +167,7 @@ function HomePrimaryNavigation({
 }) {
   const [openGenrePath, setOpenGenrePath] = useState<string | null>(null)
   const [openGenreCenter, setOpenGenreCenter] = useState(() => window.innerWidth / 2)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [genresByType, setGenresByType] = useState<Record<string, { id: string; title: string }[]>>({ movie: [], cartoon: [], anime: [] })
   const [genreLoadError, setGenreLoadError] = useState("")
   const closeGenreTimer = useRef<number | null>(null)
@@ -255,13 +256,59 @@ function HomePrimaryNavigation({
     }
   }, [openGenrePath])
 
+  useEffect(() => {
+    if (!mobileMenuOpen) return
+    function closeMenu(event: KeyboardEvent) {
+      if (event.key === "Escape") setMobileMenuOpen(false)
+    }
+    function closeOutside(event: globalThis.PointerEvent) {
+      if (
+        event.target instanceof Element
+        && !event.target.closest(".home-primary-nav, .home-mobile-menu-toggle")
+      ) {
+        setMobileMenuOpen(false)
+      }
+    }
+    function closeOnDesktop(event: MediaQueryListEvent) {
+      if (!event.matches) setMobileMenuOpen(false)
+    }
+    const desktopQuery = window.matchMedia("(min-width: 640px)")
+    document.addEventListener("keydown", closeMenu)
+    document.addEventListener("pointerdown", closeOutside)
+    desktopQuery.addEventListener("change", closeOnDesktop)
+    return () => {
+      document.removeEventListener("keydown", closeMenu)
+      document.removeEventListener("pointerdown", closeOutside)
+      desktopQuery.removeEventListener("change", closeOnDesktop)
+    }
+  }, [mobileMenuOpen])
+
   return (
-    <nav
-      className="home-primary-nav"
-      aria-label="Ana gezinme"
-      onMouseEnter={cancelGenreMenuClose}
-      onMouseLeave={scheduleGenreMenuClose}
-    >
+    <>
+      <button
+        className="home-mobile-menu-toggle"
+        type="button"
+        aria-label={mobileMenuOpen ? "Gezinme menüsünü kapat" : "Gezinme menüsünü aç"}
+        aria-expanded={mobileMenuOpen}
+        aria-controls="home-primary-navigation"
+        onClick={() => {
+          setMobileMenuOpen((open) => !open)
+          setOpenGenrePath(null)
+        }}
+      >
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+          {mobileMenuOpen
+            ? <path d="m6 6 12 12M18 6 6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            : <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />}
+        </svg>
+      </button>
+      <nav
+        className={`home-primary-nav${mobileMenuOpen ? " is-mobile-open" : ""}`}
+        id="home-primary-navigation"
+        aria-label="Ana gezinme"
+        onMouseEnter={cancelGenreMenuClose}
+        onMouseLeave={scheduleGenreMenuClose}
+      >
       {homeNavigation.map((item) => {
         const hasGenres = browseItems.some((browseItem) => browseItem.href === item.href)
         const menuOpen = openGenrePath === item.href
@@ -280,10 +327,12 @@ function HomePrimaryNavigation({
               aria-current={pathname === item.href ? "page" : undefined}
               aria-label={item.label}
               aria-expanded={hasGenres ? menuOpen : undefined}
-              onClick={hasGenres ? (event) => {
+              onClick={(event) => {
+                setMobileMenuOpen(false)
+                if (!hasGenres) return
                 event.preventDefault()
                 onSelectCatalog(item.href, null)
-              } : undefined}
+              }}
             >
               <svg className="home-primary-nav__icon" aria-hidden="true" viewBox="0 0 24 24" fill="none">
                 {item.icon === "home" && <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V10Z" fill="currentColor" />}
@@ -323,7 +372,8 @@ function HomePrimaryNavigation({
           </div>
         )
       })}
-    </nav>
+      </nav>
+    </>
   )
 }
 
