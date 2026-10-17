@@ -478,7 +478,6 @@ function TestCollectionRow({
       if (!firstPoster) return
       const styles = window.getComputedStyle(track)
       setCardStride(firstPoster.getBoundingClientRect().width + (Number.parseFloat(styles.columnGap) || 0))
-      initializeMobileCarouselScroll(track, firstPoster, isMobileLayout)
     }
     measure()
     const observer = new ResizeObserver(measure)
@@ -551,7 +550,6 @@ function TestTopTenRow({ items }: { items: { item: HomeCatalogItem; instance: nu
       if (!firstCard) return
       const styles = window.getComputedStyle(track)
       setCardStride(firstCard.getBoundingClientRect().width + (Number.parseFloat(styles.columnGap) || 0))
-      initializeMobileCarouselScroll(track, firstCard, isMobileLayout)
     }
     measure()
     const observer = new ResizeObserver(measure)
@@ -687,7 +685,6 @@ function TestContinueRow({
       if (!firstCard) return
       const styles = window.getComputedStyle(track)
       setCardStride(firstCard.getBoundingClientRect().width + (Number.parseFloat(styles.columnGap) || 0))
-      initializeMobileCarouselScroll(track, firstCard, isMobileLayout)
       const artwork = firstCard.querySelector<HTMLElement>(".test-continue-card__artwork")
       if (artwork) setArtworkHeight(artwork.getBoundingClientRect().height)
     }
@@ -812,19 +809,6 @@ function useMobileLayout() {
   }, [])
 
   return isMobileLayout
-}
-
-function initializeMobileCarouselScroll(track: HTMLElement, firstCard: HTMLElement, isMobile: boolean) {
-  const carousel = track.parentElement
-  if (!isMobile || !carousel || carousel.scrollLeft !== 0) return
-
-  const styles = window.getComputedStyle(track)
-  const gap = Number.parseFloat(styles.columnGap) || 0
-  const cardWidth = firstCard.getBoundingClientRect().width
-  const peek = (carousel.clientWidth - 2 * cardWidth - 3 * gap) / 2
-  if (peek <= 0) return
-
-  carousel.scrollLeft = cardWidth + gap - peek
 }
 
 function useTouchSwipe(onMove: (direction: -1 | 1) => void) {
