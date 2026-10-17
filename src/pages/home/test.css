@@ -1045,6 +1045,10 @@
     will-change: auto;
   }
 
+  .test-row__track--top-ten {
+    padding-inline: var(--catalog-inset);
+  }
+
   .test-row__carousel--posters {
     --mobile-card-width: var(--poster-card-width);
   }
