@@ -918,12 +918,13 @@ html:has(.home-page-header)::-webkit-scrollbar-thumb:hover {
 
 @media (max-width: 639px) {
   .home-mobile-menu-toggle {
-    position: relative;
+    position: absolute;
+    top: 50%;
+    right: 0;
     z-index: 42;
     display: grid;
-    width: 42px;
-    height: 42px;
-    flex: 0 0 42px;
+    width: 48px;
+    height: 48px;
     place-items: center;
     padding: 0;
     border: 0;
@@ -931,6 +932,7 @@ html:has(.home-page-header)::-webkit-scrollbar-thumb:hover {
     color: #f3f4f6;
     background: transparent;
     cursor: pointer;
+    transform: translateY(-50%);
   }
 
   .home-mobile-menu-toggle svg {
@@ -1010,5 +1012,20 @@ html:has(.home-page-header)::-webkit-scrollbar-thumb:hover {
 
   .home-page-header .home-primary-nav__genre-menu {
     display: none;
+  }
+
+  .home-page-header .home-header-actions {
+    gap: 4px;
+    margin-right: 48px;
+  }
+
+  .home-page-header .home-header-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .home-page-header .home-header-icon svg {
+    width: 25px;
+    height: 25px;
   }
 }

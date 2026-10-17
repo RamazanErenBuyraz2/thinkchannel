@@ -974,20 +974,67 @@
 
   .test-row__carousel--posters {
     --poster-gap: 10px;
-    --poster-card-width: clamp(150px, 42vw, 190px);
+    --poster-card-width: clamp(160px, 52vw, 220px);
     --poster-peek: clamp(40px, 11vw, 52px);
   }
 
   .test-row__carousel--top-ten {
     --top-ten-gap: 10px;
-    --top-ten-card-width: clamp(150px, 42vw, 190px);
+    --top-ten-card-width: clamp(160px, 52vw, 220px);
     --poster-peek: clamp(40px, 11vw, 52px);
+    width: 100%;
   }
 
   .test-row__carousel--continue {
     --continue-gap: 12px;
     --continue-card-width: clamp(250px, 72vw, 330px);
     --poster-peek: clamp(40px, 11vw, 52px);
+  }
+
+  .test-row__carousel--posters,
+  .test-row__carousel--top-ten,
+  .test-row__carousel--continue {
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    scroll-padding-inline: 50%;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+  }
+
+  .test-row__carousel--posters::-webkit-scrollbar,
+  .test-row__carousel--top-ten::-webkit-scrollbar,
+  .test-row__carousel--continue::-webkit-scrollbar {
+    display: none;
+  }
+
+  .test-row__track--posters,
+  .test-row__track--top-ten,
+  .test-row__track--continue {
+    width: max-content;
+    padding-inline: calc((100vw - var(--mobile-card-width)) / 2);
+    transform: none !important;
+    transition: none;
+    will-change: auto;
+  }
+
+  .test-row__carousel--posters {
+    --mobile-card-width: var(--poster-card-width);
+  }
+
+  .test-row__carousel--top-ten {
+    --mobile-card-width: var(--top-ten-card-width);
+  }
+
+  .test-row__carousel--continue {
+    --mobile-card-width: var(--continue-card-width);
+  }
+
+  .test-poster,
+  .test-top-ten-card,
+  .test-continue-card {
+    scroll-snap-align: center;
   }
 
   .test-poster {
@@ -1024,16 +1071,6 @@
 
   .test-continue-card__info p {
     font-size: 12px;
-  }
-
-  .home-page-header:has(+ .home-header-divider + .authenticated-home--browse-test) .home-header-icon {
-    width: 32px;
-    height: 34px;
-  }
-
-  .home-page-header:has(+ .home-header-divider + .authenticated-home--browse-test) .home-header-icon svg {
-    width: 18px;
-    height: 18px;
   }
 
   .home-page-header:has(+ .home-header-divider + .authenticated-home--browse-test) .home-primary-nav {

@@ -502,7 +502,7 @@ function TestCollectionRow({
   return (
     <section className="test-row" aria-label={title}>
       <h2>{title}</h2>
-      <div className="test-row__carousel test-row__carousel--posters" {...swipeHandlers}>
+      <div className="test-row__carousel test-row__carousel--posters" {...(isMobileLayout ? {} : swipeHandlers)}>
         <div
           className="test-row__track test-row__track--posters"
           ref={trackRef}
@@ -576,7 +576,7 @@ function TestTopTenRow({ items }: { items: { item: HomeCatalogItem; instance: nu
         <h2>Top 10</h2>
         <span className="test-top-ten-heading__rule" aria-hidden="true" />
       </header>
-      <div className="test-row__carousel test-row__carousel--top-ten" {...swipeHandlers}>
+      <div className="test-row__carousel test-row__carousel--top-ten" {...(isMobileLayout ? {} : swipeHandlers)}>
         <div
           className="test-row__track test-row__track--top-ten"
           ref={trackRef}
@@ -711,7 +711,7 @@ function TestContinueRow({
       <h2>İzlemeye Devam Et</h2>
       <div
         className="test-row__carousel test-row__carousel--continue"
-        {...swipeHandlers}
+        {...(isMobileLayout ? {} : swipeHandlers)}
         style={{ "--continue-artwork-height": `${artworkHeight}px` } as CSSProperties}
       >
         <div
