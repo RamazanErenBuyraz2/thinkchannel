@@ -4,7 +4,6 @@ import { getMediaDeliveryUrl } from "../../assets/js/mediaUrl"
 import { contentDetailsPath } from "./contentRoutes"
 import { HomePromoCard } from "./HomePromoCard"
 import { useHomeBackgroundVideoPreference } from "./homeVideoAmbientPreference"
-import { useVideoAmbient, VideoAmbientLayer } from "./useVideoAmbient"
 import type { ContinueWatchingItem, FeaturedHomeSlide, HomeCatalogCollection, HomeCatalogItem } from "./types"
 import type { MouseEvent as ReactMouseEvent, TouchEvent as ReactTouchEvent } from "react"
 
@@ -274,9 +273,7 @@ function TestHeroSlide({
 }) {
   const [videoReady, setVideoReady] = useState(false)
   const [videoPlaying, setVideoPlaying] = useState(false)
-  const [ambientReady, setAmbientReady] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
-  const ambientCanvasRef = useRef<HTMLCanvasElement>(null)
   const genres = slide.genre?.split(/[,;|]/u).map((genre) => genre.trim()).filter(Boolean).slice(0, 2).join(", ")
   const metadata = [slide.release_year, genres].filter(Boolean)
   const metadataCount = Number(Boolean(slide.age_icon_url))
@@ -287,8 +284,6 @@ function TestHeroSlide({
   const metadataRevealDuration = metadataCount > 0
     ? metadataStartDelay + (metadataCount - 1) * metadataStagger + 500
     : 0
-  useVideoAmbient(videoRef, ambientCanvasRef, backgroundVideoEnabled && videoPlaying && ambientReady)
-
   useLayoutEffect(() => {
     const video = videoRef.current
     if (video) {
@@ -296,15 +291,7 @@ function TestHeroSlide({
       video.currentTime = 0
     }
     setVideoPlaying(false)
-    setAmbientReady(false)
   }, [active, slide.id])
-
-  useEffect(() => {
-    setAmbientReady(false)
-    if (!backgroundVideoEnabled || !videoPlaying) return
-    const timer = window.setTimeout(() => setAmbientReady(true), 3800)
-    return () => window.clearTimeout(timer)
-  }, [backgroundVideoEnabled, videoPlaying])
 
   useEffect(() => {
     setVideoReady(false)
@@ -355,7 +342,6 @@ function TestHeroSlide({
   }
   return (
     <article className={`test-hero${active ? " is-active" : ""}${slide.background_video_url ? " has-background-video" : ""}${backgroundVideoEnabled && videoPlaying ? " is-video-playing" : ""}`} aria-roledescription="slide" aria-label={slide.title}>
-      {backgroundVideoEnabled && videoPlaying && ambientReady && <VideoAmbientLayer canvasRef={ambientCanvasRef} />}
       {slide.background_video_url && slide.image_url && <img
         className="test-hero__media"
         src={getMediaDeliveryUrl(slide.image_url)}

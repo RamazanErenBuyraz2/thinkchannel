@@ -808,11 +808,6 @@ html:has(.home-page-header)::-webkit-scrollbar-thumb:hover {
   background: transparent;
 }
 
-.landing-main.authenticated-home--browse-test:has(.test-hero.is-video-playing),
-.test-page:has(.test-hero.is-video-playing) {
-  background: transparent;
-}
-
 #root:has(.home-video-ambient-layer) .landing-footer {
   background: transparent !important;
   background-image: none !important;
