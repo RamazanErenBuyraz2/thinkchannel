@@ -506,6 +506,52 @@ html:has(.home-page-header)::-webkit-scrollbar-thumb:hover {
     justify-content: center;
     text-align: center;
   }
+
+  .authenticated-home--homepage .home-featured__content {
+    bottom: 18%;
+    width: min(78%, 420px);
+  }
+
+  .authenticated-home--homepage .home-featured__content h1 {
+    font-size: clamp(28px, 7vw, 38px);
+  }
+
+  .authenticated-home--homepage .home-featured__logo {
+    width: min(220px, 68%);
+    max-height: 64px;
+  }
+
+  .authenticated-home--homepage .home-featured__metadata {
+    margin-top: 8px;
+    font-size: 10px;
+  }
+
+  .authenticated-home--homepage .home-featured__age-icon,
+  .authenticated-home--homepage .home-featured__metadata-quality img {
+    height: 16px;
+  }
+
+  .authenticated-home--homepage .home-featured__age-icon {
+    width: 18px;
+  }
+
+  .authenticated-home--homepage .home-featured__metadata-quality img {
+    max-width: 42px;
+  }
+
+  .authenticated-home--homepage .home-featured__description {
+    margin-top: 10px;
+    font-size: 12px;
+    line-height: 1.45;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+
+  .authenticated-home--homepage .home-featured__action {
+    min-height: 38px;
+    padding-inline: 14px;
+    font-size: 12px;
+  }
 }
 
 @media (min-width: 640px) {
