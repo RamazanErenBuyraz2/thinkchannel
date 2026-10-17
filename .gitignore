@@ -1,0 +1,11 @@
+node_modules/
+dist/
+release/
+.env
+.env.*
+!.env.example
+/temp_fix.py
+/temp_fix2.py
+/tsc_result.txt
+*.tsbuildinfo
+*.log

@@ -1,0 +1,36 @@
+body {
+  margin: 0;
+  background: var(--site-background, #202020);
+  color: var(--site-text, #fff);
+  font-family: var(--site-font-family);
+}
+
+body :not(.admin-dashboard):not(.admin-auth-page):not(.admin-dashboard *):not(.admin-auth-page *) {
+  font-family: var(--site-font-family);
+}
+
+body :is(button, input, select, textarea):not(.admin-dashboard *):not(.admin-auth-page *) {
+  font-family: var(--site-font-family);
+}
+
+body :is(button[type="submit"], .site-primary-button) {
+  border-color: #fff;
+  color: #111;
+  background: #fff;
+}
+
+body :is(button[type="submit"], .site-primary-button):hover:not(:disabled) {
+  border-color: #e5e5e5;
+  background: #e5e5e5;
+}
+
+.login-page {
+  position: relative;
+  box-sizing: border-box;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 124px 20px 28px;
+  background: #040714;
+}

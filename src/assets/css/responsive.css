@@ -1,0 +1,247 @@
+@media (max-width: 640px) {
+  .login-page {
+    padding: 104px 16px 24px;
+  }
+
+  .profile-picker-page {
+    padding: 0 18px 32px;
+  }
+
+  .select-avatar-page {
+    padding: 0 28px 32px;
+  }
+
+  .select-avatar-page .auth-header {
+    top: 14px;
+    right: 18px;
+    left: 18px;
+  }
+
+  .select-avatar-content {
+    margin-top: 118px;
+  }
+
+  .select-avatar-content > h1 {
+    margin-bottom: 48px;
+    font-size: 25px;
+  }
+
+  .avatar-gallery h2 {
+    font-size: 17px;
+  }
+
+  .avatar-gallery-row {
+    gap: 14px;
+  }
+
+  .avatar-gallery-choice {
+    width: min(42vw, 180px);
+    height: min(42vw, 180px);
+    flex-basis: min(42vw, 180px);
+    font-size: 88px;
+  }
+
+  .avatar-gallery-arrow {
+    width: 36px;
+    height: 54px;
+    font-size: 40px;
+  }
+
+  .create-profile-content {
+    margin-top: 72px;
+  }
+
+  .create-profile-main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .create-profile-avatar-panel {
+    grid-row: 1;
+    margin-bottom: 4px;
+  }
+
+  .create-profile-avatar {
+    width: 120px;
+    height: 120px;
+    font-size: 64px;
+  }
+
+  .profile-pin-dialog {
+    width: min(100%, 420px);
+  }
+
+  .profile-pin-dialog h2 {
+    margin-bottom: 20px;
+  }
+
+  .profile-pin-avatar-wrap {
+    width: 126px;
+    height: 126px;
+    margin-bottom: 28px;
+  }
+
+  .profile-pin-avatar {
+    width: 126px;
+    height: 126px;
+  }
+
+  .profile-pin-avatar-lock {
+    width: 38px;
+    height: 38px;
+  }
+
+  .profile-pin-dialog .profile-pin-inputs {
+    width: min(100%, 240px);
+    grid-template-columns: repeat(4, 52px);
+    gap: 10px;
+  }
+
+  .profile-pin-digit {
+    width: 52px;
+    height: 52px;
+  }
+
+  .profile-pin-forgot {
+    margin: 20px 0 22px;
+    font-size: 16px;
+  }
+
+  .profile-pin-cancel {
+    width: min(100%, 335px);
+  }
+
+  .profile-picker-page .auth-header {
+    top: 14px;
+    right: 18px;
+    left: 18px;
+  }
+
+  .profile-picker-edit {
+    min-height: 38px;
+    padding: 0 12px;
+    font-size: 10px;
+  }
+
+  .profile-picker-content {
+    margin-top: 132px;
+  }
+
+  .profile-picker-list,
+  .profile-picker-empty {
+    gap: 18px;
+    margin-top: 54px;
+  }
+
+  .profile-picker-option {
+    width: 104px;
+  }
+
+  .profile-picker-avatar,
+  .profile-picker-add-icon {
+    width: 100px;
+    height: 100px;
+    font-size: 54px;
+  }
+
+  .profile-picker-avatar-wrap {
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-picker-add-icon {
+    font-size: 44px;
+  }
+
+  .profile-picker-name {
+    margin-top: 14px;
+    font-size: 15px;
+  }
+
+  .legal-modal-backdrop {
+    align-items: end;
+    padding: 10px;
+  }
+
+  .legal-modal {
+    max-height: min(92dvh, 820px);
+    border-radius: 12px;
+  }
+
+  .legal-modal-header {
+    gap: 14px;
+    padding: 22px 20px 16px;
+  }
+
+  .legal-modal-body {
+    padding: 18px 20px 22px;
+  }
+
+  .legal-modal-footer {
+    gap: 12px 18px;
+    padding: 16px 20px;
+  }
+
+  .legal-modal-footer span {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .auth-header {
+    top: 14px;
+    right: 18px;
+    left: 18px;
+  }
+
+  .login-card {
+    padding: 20px;
+  }
+
+  .login-card--signup {
+    padding: 18px 16px;
+  }
+
+  .login-content--signup {
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  .login-content {
+    width: 100%;
+  }
+
+  .profile-content {
+    width: 100%;
+  }
+
+  .profile-settings-page {
+    padding: 72px 16px 32px;
+  }
+
+  .profile-settings-page .profile-card {
+    padding: 18px;
+  }
+
+  .viewing-profile-actions > * {
+    flex: 1 1 auto;
+  }
+
+  .auth-footer {
+    margin-top: 24px;
+  }
+
+  .hero-content {
+    margin: 0 auto;
+  }
+
+  .hero-orb {
+    top: 15%;
+    right: -10%;
+    width: 75vw;
+  }
+
+  .hero-character {
+    left: 14%;
+    width: 64vw;
+    opacity: 0.5;
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "name": "anime-platform",
+  "version": "1.0.0",
+  "productName": "Think Channel",
+  "description": "Think Channel yayın platformu",
+  "author": "Think Channel",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:web": "vite",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
+    "start:api": "tsx server/index.ts",
+    "desktop:build:app": "vite build --config desktop/vite.config.ts && tsc -p desktop/tsconfig.electron.json",
+    "desktop:dev": "npm run desktop:build:app && electron .",
+    "desktop:package": "npm run desktop:build:app && electron-builder --win nsis"
+  },
+  "main": "release/electron/desktop/electron/main.js",
+  "build": {
+    "appId": "com.thinkchannel.admin",
+    "productName": "Think Channel Admin",
+    "directories": {
+      "output": "release/installer"
+    },
+    "files": [
+      "release/electron/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "asar": true,
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  },
+  "dependencies": {
+    "@e965/xlsx": "^0.20.3",
+    "@phosphor-icons/react": "^2.1.10",
+    "@refinedev/core": "^5.0.12",
+    "@refinedev/supabase": "^6.0.2",
+    "@supabase/supabase-js": "^2.57.0",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "hls.js": "^1.7.3",
+    "mediabunny": "^1.61.4",
+    "mp4box": "^0.5.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "sharp": "^0.35.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.11",
+    "@types/express": "^5.0.3",
+    "@types/node": "^22.15.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "electron": "^44.7.0",
+    "electron-builder": "^26.15.3",
+    "postcss": "^8.5.29",
+    "tailwindcss": "^4.1.11",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3",
+    "vite": "^7.1.3"
+  }
+}

@@ -1,0 +1,75 @@
+body.app-booting {
+  overflow: hidden;
+}
+
+body.app-booting #root {
+  visibility: hidden;
+}
+
+.app-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  justify-items: center;
+  overflow: hidden;
+  background: transparent;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 250ms ease, visibility 250ms linear 250ms;
+}
+
+body.app-booting.app-first-load .app-preloader {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  transition: none;
+}
+
+body.app-booting:not(.app-first-load) .app-preloader {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  transition: none;
+}
+
+.app-preloader::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+}
+
+.app-preloader__spinner {
+  position: relative;
+  z-index: 1;
+  display: none;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 3px solid rgb(255 255 255 / 22%);
+  border-top-color: #f5f5f5;
+  border-radius: 50%;
+  animation: app-preloader-spin 750ms linear infinite;
+}
+
+body.app-first-load .app-preloader__spinner {
+  display: block;
+}
+
+body.app-repeat-load .app-preloader__spinner {
+  display: block;
+}
+
+@keyframes app-preloader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-preloader__spinner {
+    animation-duration: 1800ms;
+  }
+}

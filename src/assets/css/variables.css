@@ -1,0 +1,164 @@
+@font-face {
+  src: url("/fonts/inspire/inspire/Inspire-Regular.f2199f841165c4ddbafcf177da3ef974.woff2") format("woff2"), url("/fonts/inspire/inspire/Inspire-Regular.c7d8596d5b575e25ed1bc78c4471d668.woff") format("woff");
+  font-weight: 400;
+  font-display: swap;
+  font-family: Inspire;
+}
+
+@font-face {
+  src: url("/fonts/inspire/inspire/Inspire-Bold.4ff15ddc93445342649194969715b0b5.woff2") format("woff2"), url("/fonts/inspire/inspire/Inspire-Bold.b16fb94fbdeb4ab54a59175c7087e713.woff") format("woff");
+  font-weight: 700;
+  font-display: swap;
+  font-family: Inspire;
+}
+
+@font-face {
+  src: url("/fonts/inspire/inspire-ar/InspireAR-Regular.c1801e3bc7f68e1805cdd2e0170c4455.woff2") format("woff2"), url("/fonts/inspire/inspire-ar/InspireAR-Regular.ed562a392de1e8078df5cf0ab987bdd1.woff") format("woff");
+  font-weight: 400;
+  font-display: swap;
+  font-family: InspireAR;
+}
+
+@font-face {
+  src: url("/fonts/inspire/inspire-ar/InspireAR-Bold.10bd56cfb8c6c6393d4584ddc4e9d292.woff2") format("woff2"), url("/fonts/inspire/inspire-ar/InspireAR-Bold.b5a6c1f17832e3a353ae52959a02238a.woff") format("woff");
+  font-weight: 700;
+  font-display: swap;
+  font-family: InspireAR;
+}
+
+@font-face {
+  src: url("/fonts/inspire/inspire-he/InspireHE-Regular.0a16e9ed87ef7fcbf0728dd686e83139.woff2") format("woff2"), url("/fonts/inspire/inspire-he/InspireHE-Regular.cb44e996733caf12915a25495aca24d6.woff") format("woff");
+  font-weight: 400;
+  font-display: swap;
+  font-family: InspireHE;
+}
+
+@font-face {
+  src: url("/fonts/inspire/inspire-he/InspireHE-Bold.f9de5062d473e7e923db98376f7a173c.woff2") format("woff2"), url("/fonts/inspire/inspire-he/InspireHE-Bold.7fcea86c4dc12998d88c9a6a5fe8da68.woff") format("woff");
+  font-weight: 700;
+  font-display: swap;
+  font-family: InspireHE;
+}
+
+@font-face {
+  src: url("/fonts/inspire/inspire-jp/InspireJP-Regular.137a6e40f1f103188e364779cca39443.woff2") format("woff2"), url("/fonts/inspire/inspire-jp/InspireJP-Regular.8b2f3dc4bc95eb61d9c2384dcb8532b0.woff") format("woff");
+  font-weight: 400;
+  font-display: swap;
+  font-family: InspireJP;
+}
+
+@font-face {
+  src: url("/fonts/inspire/inspire-jp/InspireJP-Bold.d27e6da7a0d035d7d2a1f2fda2c2b945.woff2") format("woff2"), url("/fonts/inspire/inspire-jp/InspireJP-Bold.2393db11f22665b723513ce2c9f75fcb.woff") format("woff");
+  font-weight: 700;
+  font-display: swap;
+  font-family: InspireJP;
+}
+
+@font-face {
+  src: url("/fonts/inspire/inspire-kr/InspireKR-Regular.1f7c753829e5d93c0bf4330e419a970a.woff2") format("woff2"), url("/fonts/inspire/inspire-kr/InspireKR-Regular.2cc127b82c917b7567c1a634d990468c.woff") format("woff");
+  font-weight: 400;
+  font-display: swap;
+  font-family: InspireKR;
+}
+
+@font-face {
+  src: url("/fonts/inspire/inspire-kr/InspireKR-Bold.c7a0c25f87d018c22a2d1b01037af5b3.woff2") format("woff2"), url("/fonts/inspire/inspire-kr/InspireKR-Bold.301d77d8b1b985ee1272100de352b374.woff") format("woff");
+  font-weight: 700;
+  font-display: swap;
+  font-family: InspireKR;
+}
+
+@font-face {
+  src: url("/fonts/inspire/inspire-sc/InspireSC-Regular.b5de7823023dd7fd8a62a9cf64faa164.woff2") format("woff2"), url("/fonts/inspire/inspire-sc/InspireSC-Regular.2e3b8391c46114b33cac6809b6446616.woff") format("woff");
+  font-weight: 400;
+  font-display: swap;
+  font-family: InspireSC;
+}
+
+@font-face {
+  src: url("/fonts/inspire/inspire-sc/InspireSC-Bold.763eaacece3698f59d59c959c618c561.woff2") format("woff2"), url("/fonts/inspire/inspire-sc/InspireSC-Bold.9fe9053eb075dd2e622fe38c42cb40f0.woff") format("woff");
+  font-weight: 700;
+  font-display: swap;
+  font-family: InspireSC;
+}
+
+@font-face {
+  src: url("/fonts/inspire/inspire-tc/InspireTC-Regular.34c7dfe4f4049255b3e6fdba86f413a0.woff2") format("woff2"), url("/fonts/inspire/inspire-tc/InspireTC-Regular.dca4821d79abd797cd3e3f99f6e7223f.woff") format("woff");
+  font-weight: 400;
+  font-display: swap;
+  font-family: InspireTC;
+}
+
+@font-face {
+  src: url("/fonts/inspire/inspire-tc/InspireTC-Bold.ba6fb074a7847ce8ec929df65e5bd8ee.woff2") format("woff2"), url("/fonts/inspire/inspire-tc/InspireTC-Bold.976ce5101b22982651f0f08a7c39476f.woff") format("woff");
+  font-weight: 700;
+  font-display: swap;
+  font-family: InspireTC;
+}
+
+@font-face {
+  src: url("/fonts/inspire/inspire-th/InspireTH-Regular.c7ac053b68a8dee8bd262c842fc99d34.woff2") format("woff2"), url("/fonts/inspire/inspire-th/InspireTH-Regular.c451ab5762a4196bc10fbb1476ca6393.woff") format("woff");
+  font-weight: 400;
+  font-display: swap;
+  font-family: InspireTH;
+}
+
+@font-face {
+  src: url("/fonts/inspire/inspire-th/InspireTH-Bold.e3a2b0640fe33a12487ba2f670d0970f.woff2") format("woff2"), url("/fonts/inspire/inspire-th/InspireTH-Bold.2d95ccabeb5e3081a66b1e11e1feae4b.woff") format("woff");
+  font-weight: 700;
+  font-display: swap;
+  font-family: InspireTH;
+}
+
+@font-face {
+  src: url("/fonts/inspire/inspire-thl/InspireTHL-Regular.2bb4aa9ced5d57730e2caeea81234002.woff2") format("woff2"), url("/fonts/inspire/inspire-thl/InspireTHL-Regular.f341656cd9f12b5e47b71200ab509225.woff") format("woff");
+  font-weight: 400;
+  font-display: swap;
+  font-family: InspireTHL;
+}
+
+@font-face {
+  src: url("/fonts/inspire/inspire-thl/InspireTHL-Bold.f6b08f0fa8088a14d9d502b57a1fe8a0.woff2") format("woff2"), url("/fonts/inspire/inspire-thl/InspireTHL-Bold.9ad6d2be706da00d1211f90412a8048a.woff") format("woff");
+  font-weight: 700;
+  font-display: swap;
+  font-family: InspireTHL;
+}
+
+@font-face {
+  src: url("/fonts/inspire/inspire-mini/InspireMini-Regular.7c00bb4f4b6eb1546049c9ab76dc3176.woff2") format("woff2"), url("/fonts/inspire/inspire-mini/InspireMini-Regular.d7c6a531bf4c22c3949ccf8e9a07aec3.woff") format("woff");
+  font-weight: 400;
+  font-display: swap;
+  font-family: InspireMini-Regular;
+}
+
+:root {
+  color-scheme: dark;
+  --page-black: #000;
+  --auth-text: #f3f3f4;
+  --auth-muted: #c6c7ca;
+  --auth-link: #66b5ef;
+  --auth-panel: #27282d;
+  --auth-panel-dark: #1d1e21;
+  --auth-field: rgba(19, 20, 23, 0.48);
+  --auth-field-border: #62646a;
+  --loader-spinner-color: #fff;
+  --loader-spinner-track: rgb(255 255 255 / 18%);
+  --admin-background: #11121e;
+  --admin-header: #171824;
+  --admin-card: #1d1d2d;
+  --admin-panel: #1d1d2d;
+  --admin-accent: #19d99a;
+  --admin-white: #f5f5fa;
+  --admin-muted: #9698aa;
+  --admin-field: #1b1c2b;
+  --admin-field-border: #34364c;
+  --admin-primary: #19d99a;
+  --site-accent: #19d99a;
+  --site-button: #19d99a;
+  --site-background: #11121e;
+  --site-panel: #1d1d2d;
+  --site-field: #1b1c2b;
+  --site-text: #f5f5fa;
+  --site-font-family: Inspire, InspireAR, InspireHE, InspireJP, InspireKR, InspireSC, InspireTC, InspireTH, InspireTHL, InspireMini-Regular, "SF Pro", "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", system-ui, sans-serif;
+  --breakpoint-mobile: 640px;
+}
