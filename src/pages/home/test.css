@@ -1039,26 +1039,10 @@
   .test-row__track--top-ten,
   .test-row__track--continue {
     width: max-content;
-    padding-inline: calc((100vw - var(--mobile-card-width)) / 2);
+    padding-inline: var(--catalog-inset);
     transform: none !important;
     transition: none;
     will-change: auto;
-  }
-
-  .test-row__track--top-ten {
-    padding-inline: var(--catalog-inset);
-  }
-
-  .test-row__carousel--posters {
-    --mobile-card-width: var(--poster-card-width);
-  }
-
-  .test-row__carousel--top-ten {
-    --mobile-card-width: var(--top-ten-card-width);
-  }
-
-  .test-row__carousel--continue {
-    --mobile-card-width: var(--continue-card-width);
   }
 
   .test-poster,
