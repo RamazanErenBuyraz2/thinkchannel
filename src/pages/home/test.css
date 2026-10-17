@@ -261,6 +261,11 @@
   animation: home-featured-metadata-reveal 500ms ease both;
 }
 
+.test-hero__description-reveal {
+  opacity: 0;
+  animation: home-featured-metadata-reveal 500ms ease both;
+}
+
 .test-hero__content > .home-featured__actions {
   pointer-events: auto;
   opacity: 0;
@@ -1003,10 +1008,24 @@
   }
 
   .test-catalog__section-group > .home-promo-card .home-featured__content > .home-featured__metadata {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 100%;
+    min-height: 0;
+    box-sizing: border-box;
     justify-content: flex-start;
     gap: 0;
     margin-top: 6px;
+    padding: 0;
     font-size: 10px;
+    white-space: nowrap;
+  }
+
+  .test-catalog__section-group > .home-promo-card .home-featured__metadata-item--genre {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .test-catalog__section-group > .home-promo-card .home-featured__age-icon {
